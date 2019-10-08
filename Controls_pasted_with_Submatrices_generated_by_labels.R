@@ -18,25 +18,65 @@ if (!require("GOexpress")) {
 ###########################################
 ### Data given by the user
 ###########################################
-# Path_to_your_ExpressionMatrix <-c("../Data/expMatrix_TCGA_cBioPortal_no_males_withindicator.txt") ; Path_to_your_PhenoData <-c("../Data/Labels_Controls_and_Normal_separated_TCGA.txt") ; Path_of_Results<-c("../Results/Splited_SubMatrices_with_controls/") ; Title_of_Results <- c("TCGA")
-Path_to_your_ExpressionMatrix <-args[1]
-Path_to_your_PhenoData <-args[2]
-Path_of_Results <-args[3]
-Title_of_Results <-args[4]
+# Path_to_your_ExpressionMatrix <-c("../Data/expMatrix_TCGA_cBioPortal_no_males_withindicator.txt") ; Path_to_your_PhenoData <-c("../Data/Labels_Controls_and_Normal_separated_TCGA.txt") ; Path_of_Results<-c("../Results/Splited_SubMatrices_with_controls/") ; Title_of_Results <- c("TCGA"); colname_of_PhenoData_to_split<-c("Labels") ; values_to_use_for_split<- c("Control") 
+Path_to_your_ExpressionMatrix <- args[1]
+Path_to_your_PhenoData <- args[2]
+Path_of_Results <- args[3]
+Title_of_Results <- args[4]
+colname_of_PhenoData_to_split <- args[5]
+values_to_use_for_split <- args[6] # Houston we have a problem
 ############################################
 ### Reading the data
 ############################################
 MyEMatrix <- read.table(Path_to_your_ExpressionMatrix,header=TRUE, sep= "\t", quote = "")
-PhenoData<-read.table(Path_to_your_PhenoData)
+myPhenoData <-read.table(Path_to_your_PhenoData)
+
+############################################
+### Building an expressionSet
+############################################
+My_pData_Anotdf <- AnnotatedDataFrame( data= myPhenoData) # Creating the PhenoData as an annotated data frame  
+validObject(My_pData_Anotdf)
+
+myExpressionSet <- ExpressionSet(as.matrix(MyEMatrix), phenoData=My_pData_Anotdf )
 
 ############################################
 ### Quality control 
 ############################################
-if (length(colnames(MyEMatrix)) / ( sum(colnames(MyEMatrix) == rownames(PhenoData)) ) == 1 ){
+if (length(colnames(MyEMatrix)) / ( sum(colnames(MyEMatrix) == rownames(myPhenoData)) ) == 1 ){
   print("Ok: Your expression matrix and Labels have the same names in the same order")
 } else{
   print("ERROR: Your expression matrix and Labels DOESN'T have the same names in the same order")
 } # Checking consistency between the given data
+
+################################################################
+### Splitting the original expressionSet in subexpressionSets
+################################################################
+pData(myExpressionSet)
+
+sub.myExpressionSet <- subEset(
+  eSet = myExpressionSet,
+  subset = list(
+    Labels = c("Control")
+  )
+)
+
+myfun <- function(var, env = globalenv()) {
+  assign(eval(substitute(var)),values_to_use_for_split, envir = env)
+  print(get(var))
+}
+
+myfun(colname_of_PhenoData_to_split)
+Labels
+
+sub.AlvMac <- subEset(
+  eSet=AlvMac,
+  subset=list(
+    Treatment=c("CN","MB"),
+    Time=c("2H","6H")
+  )
+)
+
+
 
 ########################################################
 ### Splitting the original data frame in subdataframes
@@ -82,6 +122,10 @@ for( k in names(list_of_submatrices_pasted_with_Control)  ){
 }
 
 data(AlvMac)
+str(pData(AlvMac))
+assayData(AlvMac)
+experimentData(AlvMac)
+str(exprs(AlvMac))
 
 # Subset it to only samples of "CN" and "MB" treatments, and also only "2H",
 # "6H", and "24H" time-points
@@ -92,3 +136,6 @@ sub.AlvMac <- subEset(
     Time=c("2H","6H")
   )
 )
+
+str(pData(sub.AlvMac))
+str(exprs(sub.AlvMac))
