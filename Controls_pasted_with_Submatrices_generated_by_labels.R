@@ -6,33 +6,33 @@
 ### Loading and installing required libraries
 #################################################
 args <- commandArgs(trailingOnly = TRUE)
-
-#if (!require("splitstackshape")) {
-#  install.packages("splitstackshape", ask =FALSE)
-#  library("splitstackshape")
-#}
+if (!require("BiocManager")) {
+  install.packages("BiocManager", ask =FALSE)
+  library("BiocManager")
+}
+if (!require("GOexpress")) {
+  BiocManager::install("GOexpress", ask =FALSE)
+  library("GOexpress")
+}
 
 ###########################################
 ### Data given by the user
 ###########################################
-# Path_to_your_Matrix<-c("../Data/expMatrix_TCGA_cBioPortal_no_males_withindicator.txt")
-Path_to_your_Matrix <-args[1]
-# Path_to_Labels<-c("../Data/Labels_Controls_and_Normal_separated_TCGA.txt")
-Path_to_Labels <-args[2]
-# Path_of_Results<-c("../Results/Splited/Matrices/")
+# Path_to_your_ExpressionMatrix <-c("../Data/expMatrix_TCGA_cBioPortal_no_males_withindicator.txt") ; Path_to_your_PhenoData <-c("../Data/Labels_Controls_and_Normal_separated_TCGA.txt") ; Path_of_Results<-c("../Results/Splited_SubMatrices_with_controls/") ; Title_of_Results <- c("TCGA")
+Path_to_your_ExpressionMatrix <-args[1]
+Path_to_your_PhenoData <-args[2]
 Path_of_Results <-args[3]
-# Title_of_Results <- c("TCGA")
 Title_of_Results <-args[4]
 ############################################
 ### Reading the data
 ############################################
-MyEMatrix <- read.table(Path_to_your_Matrix,header=TRUE, sep= "\t", quote = "")
-Labels<-read.table(Path_to_Labels)
+MyEMatrix <- read.table(Path_to_your_ExpressionMatrix,header=TRUE, sep= "\t", quote = "")
+PhenoData<-read.table(Path_to_your_PhenoData)
 
 ############################################
 ### Quality control 
 ############################################
-if (length(colnames(MyEMatrix)) / ( sum(colnames(MyEMatrix) == rownames(Labels)) ) == 1 ){
+if (length(colnames(MyEMatrix)) / ( sum(colnames(MyEMatrix) == rownames(PhenoData)) ) == 1 ){
   print("Ok: Your expression matrix and Labels have the same names in the same order")
 } else{
   print("ERROR: Your expression matrix and Labels DOESN'T have the same names in the same order")
@@ -42,7 +42,7 @@ if (length(colnames(MyEMatrix)) / ( sum(colnames(MyEMatrix) == rownames(Labels))
 ### Splitting the original data frame in subdataframes
 ########################################################
 ### Preparing the data for the splitting function
-EMLabeled <- cbind(as.character(Labels$Labels), as.data.frame(t(MyEMatrix) , StringAsFactors = FALSE) ) # tuvimos que convertirlo a Df's porque sólo corta data frames
+EMLabeled <- cbind(as.character(PhenoData$Labels), as.data.frame(t(MyEMatrix) , StringAsFactors = FALSE) ) # We coerced to a dataframe because the cutting tool only work in that way 
 colnames(EMLabeled)[1] <- "Labels" 
 list_of_submatrices <- split( EMLabeled , EMLabeled$Labels )
 
@@ -80,3 +80,15 @@ for( k in names(list_of_submatrices_pasted_with_Control)  ){
   write.table( list_of_submatrices_pasted_with_Control[[k]], col.names = TRUE, row.names = TRUE, sep = "\t", quote = FALSE,
               file = paste0(Path_of_Results,"Control_with_subexpression_matrix_of_",k,"_from_",Title_of_Results,"_.tsv" ))
 }
+
+data(AlvMac)
+
+# Subset it to only samples of "CN" and "MB" treatments, and also only "2H",
+# "6H", and "24H" time-points
+sub.AlvMac <- subEset(
+  eSet=AlvMac,
+  subset=list(
+    Treatment=c("CN","MB"),
+    Time=c("2H","6H")
+  )
+)
