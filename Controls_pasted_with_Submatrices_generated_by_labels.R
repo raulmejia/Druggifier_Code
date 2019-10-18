@@ -60,11 +60,20 @@ sub.myExpressionSet <- subEset(
   )
 )
 
+sub.myExpressionSet <- subEset(
+  eSet = myExpressionSet,
+  subset = list(
+    get(colname_of_PhenoData_to_split)
+    )
+)
+
+
+
 myfun <- function(var, env = globalenv()) {
   assign(eval(substitute(var)),values_to_use_for_split, envir = env)
   print(get(var))
 }
-
+  
 myfun(colname_of_PhenoData_to_split)
 Labels
 
@@ -75,9 +84,12 @@ sub.AlvMac <- subEset(
     Time=c("2H","6H")
   )
 )
+hola <- ls()
+catch_my_var1 <- get(colname_of_PhenoData_to_split)
 
-
-
+subset <- list(get(colname_of_PhenoData_to_split))
+colname_of_PhenoData_to_split
+Labels
 ########################################################
 ### Splitting the original data frame in subdataframes
 ########################################################
