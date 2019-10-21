@@ -1,17 +1,59 @@
-robust_score_bydist. min_exp= 3 , min_std= 11.91253 
-pathway  1 > sig: 0.03104934 
-pathway  2 > sig: 0.003248976 
-pathway  3 > sig: 0.1691466 
-pathway  4 > sig: 0.04676414 
-pathway  5 > sig: 0.05907155 
-pathway  6 > sig: 0.03687037 
-pathway  7 > sig: 0.03352968 
-pathway  8 > sig: 0.005147467 
-pathway  9 > sig: 0.0297092 
-pathway  10 > sig: 0.07111246 
-pathway  11 > sig: 0.002487216 
-pathway  12 > sig: 0.03135303 
-pathway  13 > sig: 0.02581383 
-pathway  14 > sig: 0.09240874 
-pathway  15 > sig: 0.02515166 
-pathway  16 > sig: 0.01043609 
+robust_score_bydist. min_exp= 3.75 , min_std= 11.91253 
+pathway  1 > sig: 0.0357486 
+pathway  2 > sig: 0.003214258 
+pathway  3 > sig: 0.1224745 
+pathway  4 > sig: 0.03719717 
+pathway  5 > sig: 0.0573072 
+pathway  6 > sig: 0.02348463 
+pathway  7 > sig: 0.03268275 
+pathway  8 > sig: 0.003212753 
+pathway  9 > sig: 0.04209092 
+pathway  10 > sig: 0.07123289 
+pathway  11 > sig: 0.03732208 
+pathway  12 > sig: 0.009852964 
+pathway  13 > sig: 0.01701545 
+pathway  14 > sig: 0.0337268 
+pathway  15 > sig: 0.0255032 
+pathway  16 > sig: 0.007948209 
+pathway  17 > sig: 0.07468642 
+pathway  18 > sig: 0.1285344 
+pathway  18  k= 10 ( 10 ) wj= 1 >new sig: 0.01856503 | accepted!
+skipping pathway  19  k1= 2 
+pathway  20 > sig: 0.0109364 
+pathway  21 > sig: 0.1416707 
+pathway  22 > sig: 0.0675026 
+pathway  23 > sig: 0.07679639 
+pathway  24 > sig: 0.1841627 
+pathway  24  k= 7 ( 7 ) wj= 3 >new sig: 0.007801383 | accepted!
+skipping pathway  25  k1= 1 
+pathway  26 > sig: 0.08989211 
+pathway  26  k= 6 ( 6 ) wj= 3 >new sig: 0.03923435 | accepted!
+pathway  27 > sig: 0.01375111 
+pathway  28 > sig: 0.03005319 
+pathway  29 > sig: 0.002015049 
+pathway  30 > sig: 0.003152922 
+pathway  31 > sig: 0.05128239 
+skipping pathway  32  k2= 2 
+pathway  33 > sig: 0.03598348 
+pathway  34 > sig: 0.003157427 
+skipping pathway  35  k1= 2 
+pathway  36 > sig: 0.004870693 
+skipping pathway  37  k1= 2 
+skipping pathway  38  k1= 0 
+pathway  39 > sig: 0.01823868 
+pathway  40 > sig: 0.04057423 
+pathway  41 > sig: 0.04447062 
+pathway  42 > sig: 0.04938919 
+pathway  43 > sig: 0.2208491 
+pathway  44 > sig: 0.04636597 
+pathway  45 > sig: 0.04119047 
+skipping pathway  46  k1= 1 
+pathway  47 > sig: 0.1345302 
+pathway  47  k= 6 ( 6 ) wj= 1 >new sig: 0.04216274 | accepted!
+skipping pathway  48  k1= 2 
+pathway  49 > sig: 0.05297494 
+pathway  50 > sig: 0.04313716 
+skipping pathway  51  k1= 2 
+pathway  52 > sig: 0.02719401 
+pathway  53 > sig: 0.01314339 
+pathway  54 > sig: 0.07501027 

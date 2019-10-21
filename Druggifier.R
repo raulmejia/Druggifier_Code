@@ -18,6 +18,7 @@ filter_by_this_characteristic_of_the_pheatmap <- args[9]
 character_value_to_use_to_filter <- args[10]
 Labels_to_your_values <- args[11]
 path_to_KEGG <- args[12]
+# Pathifier parameters ... attempts , 3 vs 3.75 , topN 
 DiffExp_method <- args[13] # "limma" or "DESeq2"
 # Path_to_your_Matrix<-c("../Data/METABRIC/joined_indicator_METABRIC.txt") ; Path_to_myPhenoData <- c("../Results/Clusterig/METABRIC/Heatmaps/Lehmann_Only_ABCS/PhenoData_Clusters_Heatmap_METABRIC_Lehmann_subtypes_ABC_transporters.tsv") ; Path_of_Code<-c("./") ; Path_of_Results<-c("../Results/Druggifier/METABRIC/") ; Labels <- "METABRIC_Cluster_ABCs_on_Lehmann_subtypes" ; log2transformation <- "log2-transformation-no" ;Name_of_the_column_that_contain_your_control_or_reference <-"Labels"; Name_of_your_control_or_reference <-"Control"; filter_by_this_characteristic_of_the_pheatmap <- "cutree_rowcenter_Heatmap_METABRIC_Lehmann_subtypes_ABC_transporters" ; character_value_to_use_to_filter<-c("6","5","1"); Labels_to_your_values <-c("CL1","CL2","CL3") ; path_to_KEGG <- "../KEGG/" ; DiffExp_method <- "limma"
 # Path_to_your_Matrix<-c("../Data/TCGA/expMatrix_TCGA_cBioPortal_no_males_withindicator.txt") ; Path_to_myPhenoData <- c("../Results/Clusterig/TCGA/Heatmaps/Lehmann_Only_ABCS/PhenoData_Clusters_Heatmap_TCGA_Lehmann_subtypes_ABC_transporters.tsv") ; Path_of_Code<-c("./") ; Path_of_Results<-c("../Results/Druggifier/TCGA/") ; Labels <- "TCGA_Cluster_ABCs_on_Lehmann_subtypes" ; log2transformation <- "log2-transformation-yes" ;Name_of_the_column_that_contain_your_control_or_reference <-"Labels"; Name_of_your_control_or_reference <-"Control"; filter_by_this_characteristic_of_the_pheatmap <- "cutree_rowcenter_Heatmap_TCGA_Lehmann_subtypes_ABC_transporters" ; character_value_to_use_to_filter<-c("6","4","2","3","1"); Labels_to_your_values <-c("CL1","CL2","CL2-weak","CL3","CL3-weak") ; path_to_KEGG <- "../KEGG/" ; DiffExp_method <- "DESqe2"
@@ -113,7 +114,7 @@ for( k in 1:length( names( list_of_submatrices_withcontrols))){
   list_Pathifiers[[k]] <- Pathifier_As_R_Function(as.matrix(list_of_submatrices_withcontrols[[k]]) , KEGGdb_path , Path_of_Code,
                                                   paste0(list_of_Path_of_Results[[k]],"/","Pathifier"), 
                                                   paste0(Labels,"---",Labels_to_your_values[k]) ,
-                                                  5 , 3, 50 )
+                                                  5 , 3.75, 50 )
   print(k)
 }
 Pathifier_list_time <-proc.time() - ptm
