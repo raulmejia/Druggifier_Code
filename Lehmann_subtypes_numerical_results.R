@@ -52,7 +52,6 @@ myPhenoD <- read.table( Path_to_your_PhenoData, sep= "\t", header=TRUE, row.name
 print("Loading Expression Matrix")
 myeMatrix_complete <- read.table( Path_to_your_Matrix, sep= "\t", header=TRUE, row.names = 1, quote = "" , stringsAsFactors = FALSE)
 print("Expression Matrix loaded")
-# getwd() ; setwd("/mnt/saveit/ABCB1_code")
 
 ##################################
 #### working only with the triple negative data
@@ -79,8 +78,6 @@ myeMatrix <- myeMatrix[!ILMN_Pos , ]
 ###################################
 ### log-2 tranforming
 ###################################
-#a <- matrix(rnorm(100,5000,5000), ncol= 10)
-
 if(Do_you_want_log2 == "yes"){
     myeMatrix <- log2(myeMatrix + 1)
     print("The current program has just transformed your matrix to log2 scale")
@@ -125,8 +122,6 @@ allp <- assign.properties(ESet=myExpressionSet1, geneID.column="Gene.symbol", ge
 ##  converting the results from STROMA4 ("high", "intermediate", "low") to  numerical (-1, 0 , 1)
 ##################################
 numericalallp <- pData(allp)
-#head(numericalallp)
-#head(pData(allp))
 numericalallp <- numericalallp[,-which(colnames(numericalallp) %in% "Patienten_id")]
 char2num <- function(row){
   row <-gsub("low" ,-1,row)
@@ -142,19 +137,17 @@ colnames(numericalallp) <- colnames( pData(allp))[-1]
 ###################################
 ##  Merging PhenoDatas
 ##################################
-numericalallp_sampid <- cbind(rownames(numericalallp), numericalallp)
-colnames(numericalallp_sampid)[1] <- "Sample_ID"
-numericalallp_sampid <- as.data.frame(numericalallp_sampid) # Creating the appropriate data frame for the merge
+numericalallp_sampid <- as.data.frame(numericalallp)
+numericalallp_sampid$Sample_ID <- rownames(numericalallp) # Creating the appropriate data frame for the merge
 
-myPhenoD_sampid <- cbind(rownames(myPhenoD), myPhenoD) # Creating the appropriate data frame for the merge
-colnames(myPhenoD_sampid)[1] <- "Sample_ID"
+myPhenoD_sampid <- myPhenoD
+myPhenoD_sampid$Sample_ID <- rownames(myPhenoD) # Creating the appropriate data frame for the merge
 
 PhenoD_Lehmann <- merge( x= myPhenoD_sampid, y= numericalallp_sampid, by = "Sample_ID", all=TRUE)
 rownames(PhenoD_Lehmann) <- PhenoD_Lehmann[,"Sample_ID"] # putting the losted IDS
 PhenoD_Lehmann_ordered <- PhenoD_Lehmann[order(match( rownames(PhenoD_Lehmann)  ,
                                                                 rownames(myPhenoD))),] # Ordering according the initial PhenoData (which conserve the same order as the exprresion matrix)
-PhenoD_Lehmann_ordered[200:250,22:28]
-PhenoD_Lehmann_ordered[PhenoD_Lehmann_ordered$TripleNeg,]
+
 ###################################
 ##  saving the results
 ##################################
