@@ -1,7 +1,7 @@
-###########################################################################
+##############################################################################
 ### Druggifier 
 ## Author: Raúl Alejandro Mejía Pedroza github: https://github.com/raulmejia
-################################################################################
+##############################################################################
 ###########################################
 ## Data given by the user
 ###########################################
@@ -12,15 +12,17 @@ Path_of_Code<-args[3] # The path to your code
 Path_of_Results <-args[4] # # where do you want to save your results?
 Labels <-args[5] # Label for your results, usually where the expression data came from
 log2transformation <- args[6] # Do you want log2transformation for your expression matrix ?
-# Path_to_your_Matrix<-c("../Data/METABRIC/joined_indicator_METABRIC.txt") ; Path_to_myPhenoData <- c("../Results/Clusterig/METABRIC/Heatmaps/Lehmann_Only_ABCS/PhenoData_Clusters_Heatmap_METABRIC_Lehmann_subtypes_ABC_transporters.tsv") ; Path_of_Code<-c("./") ; Path_of_Results<-c("../Results/Druggifier/METABRIC/") ; Labels <- "METABRIC_Cluster_ABCs_on_Lehmann_subtypes" ; log2transformation <- "log2-transformation-no" ;Name_of_the_column_that_contain_your_control_or_reference <-"Labels"; Name_of_your_control_or_reference <-"Control"; filter_by_this_characteristic_of_the_pheatmap <- "cutree_rowcenter_Heatmap_METABRIC_Lehmann_subtypes_ABC_transporters" ; character_value_to_use_to_filter<-c("6","5","1"); Labels_to_your_values <-c("CL1","CL2","CL3") ; path_to_KEGG <- "../KEGG/" 
-# Path_to_your_Matrix<-c("../Data/TCGA/expMatrix_TCGA_cBioPortal_no_males_withindicator.txt") ; Path_to_myPhenoData <- c("../Results/Lehmann-STROMA4/TCGA/PhenoData_with_Lehmann_Subt_and_properties_TCGA-TripleNeg.tsv") ; Path_of_Code<-c("./") ; Path_of_Results<-c("../Results/Clusterig/TCGA/Heatmaps/Lehmann_Only_ABCS/") ; Labels <- "Heatmap_TCGA_Lehmann_subtypes_ABC_transporters" ; log2transformation <- "log2-transformation-yes"; Path_to_your_gene_list <- c("../Data/List_of_Genes/all_myABC.tsv") ; filter_by_this_characteristic_of_the_pheatmap <-;
-# Path_to_your_Matrix <- choose.files() # choose.dir()
 Name_of_the_column_that_contain_your_control_or_reference <- args[7]
 Name_of_your_control_or_reference <-args[8]
 filter_by_this_characteristic_of_the_pheatmap <- args[9]
 character_value_to_use_to_filter <- args[10]
 Labels_to_your_values <- args[11]
 path_to_KEGG <- args[12]
+DiffExp_method <- args[13] # "limma" or "DESeq2"
+# Path_to_your_Matrix<-c("../Data/METABRIC/joined_indicator_METABRIC.txt") ; Path_to_myPhenoData <- c("../Results/Clusterig/METABRIC/Heatmaps/Lehmann_Only_ABCS/PhenoData_Clusters_Heatmap_METABRIC_Lehmann_subtypes_ABC_transporters.tsv") ; Path_of_Code<-c("./") ; Path_of_Results<-c("../Results/Druggifier/METABRIC/") ; Labels <- "METABRIC_Cluster_ABCs_on_Lehmann_subtypes" ; log2transformation <- "log2-transformation-no" ;Name_of_the_column_that_contain_your_control_or_reference <-"Labels"; Name_of_your_control_or_reference <-"Control"; filter_by_this_characteristic_of_the_pheatmap <- "cutree_rowcenter_Heatmap_METABRIC_Lehmann_subtypes_ABC_transporters" ; character_value_to_use_to_filter<-c("6","5","1"); Labels_to_your_values <-c("CL1","CL2","CL3") ; path_to_KEGG <- "../KEGG/" ; DiffExp_method <- "limma"
+# Path_to_your_Matrix<-c("../Data/TCGA/expMatrix_TCGA_cBioPortal_no_males_withindicator.txt") ; Path_to_myPhenoData <- c("../Results/Clusterig/TCGA/Heatmaps/Lehmann_Only_ABCS/PhenoData_Clusters_Heatmap_TCGA_Lehmann_subtypes_ABC_transporters.tsv") ; Path_of_Code<-c("./") ; Path_of_Results<-c("../Results/Druggifier/TCGA/") ; Labels <- "TCGA_Cluster_ABCs_on_Lehmann_subtypes" ; log2transformation <- "log2-transformation-yes" ;Name_of_the_column_that_contain_your_control_or_reference <-"Labels"; Name_of_your_control_or_reference <-"Control"; filter_by_this_characteristic_of_the_pheatmap <- "cutree_rowcenter_Heatmap_TCGA_Lehmann_subtypes_ABC_transporters" ; character_value_to_use_to_filter<-c("6","4","2","3","1"); Labels_to_your_values <-c("CL1","CL2","CL2-weak","CL3","CL3-weak") ; path_to_KEGG <- "../KEGG/" ; DiffExp_method <- "DESqe2"
+# Path_to_your_Matrix<-c("../Data/TCGA/expMatrix_TCGA_cBioPortal_no_males_withindicator.txt") ; Path_to_myPhenoData <- c("../Results/Lehmann-STROMA4/TCGA/PhenoData_with_Lehmann_Subt_and_properties_TCGA-TripleNeg.tsv") ; Path_of_Code<-c("./") ; Path_of_Results<-c("../Results/Clusterig/TCGA/Heatmaps/Lehmann_Only_ABCS/") ; Labels <- "Heatmap_TCGA_Lehmann_subtypes_ABC_transporters" ; log2transformation <- "log2-transformation-yes"; Path_to_your_gene_list <- c("../Data/List_of_Genes/all_myABC.tsv") ; filter_by_this_characteristic_of_the_pheatmap <-;
+# Path_to_your_Matrix <- choose.files() # choose.dir()
 ###############################################################################
 ### Installing and/or loading required packages
 ###############################################################################
@@ -57,7 +59,6 @@ if (!require("som")) {
   library(som)
 }
 
-
 #############################################################
 ### Reading the data and creating the folder for the results
 #############################################################
@@ -65,7 +66,6 @@ ptm <- proc.time()
 Mymatrix <-read.table(Path_to_your_Matrix,header=TRUE,row.names = 1)
 read_time<-proc.time() - ptm
 allPhenoData <-read.table(Path_to_myPhenoData ,header=TRUE, sep = "\t", quote = "")
-
 
 ###############################################
 ## Creating paths to organize your results according to your characteristics and Labels
@@ -117,6 +117,27 @@ for( k in 1:length( names( list_of_submatrices_withcontrols))){
   print(k)
 }
 Pathifier_list_time <-proc.time() - ptm
-
 names( list_Pathifiers ) <-  paste0( "Pathifier",filter_by_this_characteristic_of_the_pheatmap,"-", character_value_to_use_to_filter)
+
+################################################################
+######### DGEs through DESeq2
+################################################################
+# "limma/DESeq2"
+
+if(DiffExp_method == "limma"){
+  
+}else{
+  if(DiffExp_method == "DESeq2"  ){
+    
+  }else{
+    print("Please for the argument [DiffExp_method] select limma or DESeq2")
+  }
+}
+
+################################################################
+######### DGEs through DESeq2
+################################################################
+
+
+
 
