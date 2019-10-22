@@ -182,7 +182,7 @@ mycoresavaiable
 DESeq2_list <- DESeq2_with_log2_transformed_data_only(
   Exp_Mat , MyLabels , Path_of_Code,
   Path_of_Results_DEG , Label_for_results, mylfctreshold, 
-  , myp.adj , mycoresavaiable)
+  myp.adj , mycoresavaiable)
 
 
 if(DiffExp_method == "limma"){
