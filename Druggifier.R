@@ -25,7 +25,6 @@ DiffExp_method <- args[16] # "limma" or "DESeq2"
 # Path_to_your_Matrix<-c("../Data/METABRIC/joined_indicator_METABRIC.txt") ; Path_to_myPhenoData <- c("../Results/Clusterig/METABRIC/Heatmaps/Lehmann_Only_ABCS/PhenoData_Clusters_Heatmap_METABRIC_Lehmann_subtypes_ABC_transporters.tsv") ; Path_of_Code<-c("./") ; Path_of_Results<-c("../Results/Druggifier/METABRIC/") ; Labels <- "METABRIC_Cluster_ABCs_on_Lehmann_subtypes" ; log2transformation <- "log2-transformation-no" ;Name_of_the_column_that_contain_your_control_or_reference <-"Labels"; Name_of_your_control_or_reference <-"Control"; filter_by_this_characteristic_of_the_pheatmap <- "cutree_rowcenter_Heatmap_METABRIC_Lehmann_subtypes_ABC_transporters" ; character_value_to_use_to_filter<-c("6","5","1"); Labels_to_your_values <-c("CL1","CL2","CL3") ; path_to_KEGG <- "../KEGG/" ; Stabilizing_pathifier <- 5; Filter_value_pathifier <- 3 ; Matrix_Top_N_pathifier <- 50 ; DiffExp_method <- "limma" ; mylfctreshold <- 0.6; myp.adj <- 0.05 ; mycoresavaiable <- 7
 # Path_to_your_Matrix<-c("../Data/TCGA/expMatrix_TCGA_cBioPortal_no_males_withindicator.txt") ; Path_to_myPhenoData <- c("../Results/Clusterig/TCGA/Heatmaps/Lehmann_Only_ABCS/PhenoData_Clusters_Heatmap_TCGA_Lehmann_subtypes_ABC_transporters.tsv") ; Path_of_Code<-c("./") ; Path_of_Results<-c("../Results/Druggifier/TCGA/") ; Labels <- "TCGA_Cluster_ABCs_on_Lehmann_subtypes" ; log2transformation <- "log2-transformation-yes" ;Name_of_the_column_that_contain_your_control_or_reference <-"Labels"; Name_of_your_control_or_reference <-"Control"; filter_by_this_characteristic_of_the_pheatmap <- "cutree_rowcenter_Heatmap_TCGA_Lehmann_subtypes_ABC_transporters" ; character_value_to_use_to_filter<-c("6","4","2","3","1"); Labels_to_your_values <-c("CL1","CL2","CL2-weak","CL3","CL3-weak") ; path_to_KEGG <- "../KEGG/" ; Stabilizing_pathifier <- 5; Filter_value_pathifier <- 3.75 ; Matrix_Top_N_pathifier <- 50 ; DiffExp_method <- "DESeq2" ; mylfctreshold <- 0.6; myp.adj <- 0.05 ; mycoresavaiable <- 7 
 
-
 # Path_to_your_Matrix<-c("../Data/TCGA/expMatrix_TCGA_cBioPortal_no_males_withindicator.txt") ; Path_to_myPhenoData <- c("../Results/Lehmann-STROMA4/TCGA/PhenoData_with_Lehmann_Subt_and_properties_TCGA-TripleNeg.tsv") ; Path_of_Code<-c("./") ; Path_of_Results<-c("../Results/Clusterig/TCGA/Heatmaps/Lehmann_Only_ABCS/") ; Labels <- "Heatmap_TCGA_Lehmann_subtypes_ABC_transporters" ; log2transformation <- "log2-transformation-yes"; Path_to_your_gene_list <- c("../Data/List_of_Genes/all_myABC.tsv") ; filter_by_this_characteristic_of_the_pheatmap <-;
 # Path_to_your_Matrix <- choose.files() # choose.dir()
 ###############################################################################
@@ -156,9 +155,8 @@ names( list_Pathifiers ) <-  paste0( "Pathifier",filter_by_this_characteristic_o
 ################################################################
 # "limma/DESeq2"
 
-
 Path_of_Results <- normalizePath(Path_of_Results)
-Path_of_Results_DEG <- paste0(Path_of_Results,"/","DEG-A")
+Path_of_Results_DEG <- paste0(Path_of_Results,"/","DEG")
 
 Exp_Mat <- list_of_submatrices_withcontrols[[1]]
 
@@ -169,27 +167,19 @@ MyLabels <- data.frame( Thelabels ,
                         stringsAsFactors = FALSE); colnames(MyLabels)<- "Labels"
 MyLabels[,1] <- as.character(MyLabels[,1])
 
-Path_of_Code
-
 Labels_DGE <-paste0("DGE_",Labels)
 Label_for_results <-  Labels_DGE
 
-mylfctreshold 
-myp.adj
-mycoresavaiable
-
-
-DESeq2_list <- DESeq2_with_log2_transformed_data_only(
-  Exp_Mat , MyLabels , Path_of_Code,
-  Path_of_Results_DEG , Label_for_results, mylfctreshold, 
-  myp.adj , mycoresavaiable)
-
+mylfctreshold ; myp.adj ; mycoresavaiable
 
 if(DiffExp_method == "limma"){
   
 }else{
   if(DiffExp_method == "DESeq2"  ){
-    
+    DESeq2_list <- DESeq2_with_log2_transformed_data_only(
+      Exp_Mat , MyLabels , Path_of_Code,
+      Path_of_Results_DEG , Label_for_results, mylfctreshold, 
+      myp.adj , mycoresavaiable)
   }else{
     print("Please for the argument [DiffExp_method] type limma or DESeq2")
   }

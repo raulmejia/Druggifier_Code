@@ -27,6 +27,7 @@ DESeq2_with_log2_transformed_data_only( Exp_Mat , MyLabels , Path_of_Code,
                                         Path_of_Results_DEG , Label_for_results, mylfctreshold, 
                                         myp.adj , mycoresavaiable){
 # Nota la categoria de referencia se llama "Control" 
+  results_path <- normalizePath(Path_of_Results_DEG)
 ################################################
 ######  Coercing to numeric ####################
 ################################################
