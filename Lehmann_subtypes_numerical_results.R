@@ -146,7 +146,7 @@ myPhenoD_sampid$Sample_ID <- rownames(myPhenoD) # Creating the appropriate data 
 PhenoD_Lehmann <- merge( x= myPhenoD_sampid, y= numericalallp_sampid, by = "Sample_ID", all=TRUE)
 rownames(PhenoD_Lehmann) <- PhenoD_Lehmann[,"Sample_ID"] # putting the losted IDS
 PhenoD_Lehmann_ordered <- PhenoD_Lehmann[order(match( rownames(PhenoD_Lehmann)  ,
-                                                                rownames(myPhenoD))),] # Ordering according the initial PhenoData (which conserve the same order as the exprresion matrix)
+                                                                rownames(myPhenoD))),] # Ordering according the initial PhenoData (which conserve the same order as the expresion matrix)
 
 ###################################
 ##  saving the results
