@@ -1,5 +1,4 @@
 This repo retakes this approach https://www.frontiersin.org/articles/10.3389/fphar.2018.00905/full  
-on breast cancer datasets classified by their expression of ABC transporters (namely ABCB1)
 
 Modules:
 
