@@ -1,4 +1,4 @@
-This repo retakes this approach https://www.frontiersin.org/articles/10.3389/fphar.2018.00905/full  
+This repo describes the approach used in https://www.frontiersin.org/articles/10.3389/fphar.2018.00905/full  
 
 Modules:
 
