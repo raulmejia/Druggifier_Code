@@ -19,7 +19,7 @@ Integrating the above-mentioned methods to select targets (F)
 Considering the data frame of integrated information you can identify which of your genes are druggable (D)
 
 ### 4) Ranking
-Once obtained the previous dataframe you can apply several criteria to choose your candidate targets
+Once obtained the previous dataframe you are free to apply several criteria to choose your candidate targets
 
 ### 5) Multiporpuse libraries
 General purpose libraries required for the programs 
