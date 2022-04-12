@@ -4,19 +4,19 @@ This repo describes the approach used in https://www.frontiersin.org/articles/10
 
 Modules:
 
-## 1) Subtyping (B)
-Obtaining the subtypes for your gene expression datasets
+## 1) Subtyping 
+Obtaining the subtypes for your gene expression datasets (B)
 
 ## 2) Selecting genes
-#### 2.1) DEG (E)  
-Differential expressed genes in the datasets
-#### 2.2) Pathway enrichment (C)
-Pathway enrichment analysis (in this case through Pathifier) see the paper
-#### 2.3) Intersecting DEG n Pathway enrichment (F)
-Integrating the above mentioned methods to select targets 
+#### 2.1) DEG   
+Differential expressed genes in the datasets (E)
+#### 2.2) Pathway enrichment 
+Pathway enrichment analysis (in this case through Pathifier) see the paper (C)
+#### 2.3) Intersecting DEG n Pathway enrichment 
+Integrating the above mentioned methods to select targets (F)
 
-## 3) Drug-target_Annotating (D)
-Considering the dataframe of integrated information you can identify which of your genes are druggable
+## 3) Drug-target_Annotating 
+Considering the dataframe of integrated information you can identify which of your genes are druggable (D)
 
 ## 4) Ranking
 Once obtained the previous dataframe you can apply several criteria to choose your candidate targets
