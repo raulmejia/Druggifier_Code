@@ -1,9 +1,9 @@
 This repo describes the approach used in https://www.frontiersin.org/articles/10.3389/fphar.2018.00905/full  
 
 
-
+---
 Modules:
-
+---
 ## 1) Subtyping 
 Obtaining the subtypes for your gene expression datasets (B)
 
