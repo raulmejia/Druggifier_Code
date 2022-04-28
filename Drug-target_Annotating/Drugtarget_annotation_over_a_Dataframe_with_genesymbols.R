@@ -1,5 +1,5 @@
 ################################################################################
-##  This program receives a data frame with gene symbols column and 
+##  This program receives a data frame with a gene symbols column and 
 ##   annotate their pharmacological targets according to rDGIdb
 ##  Author: Raúl Alejandro Mejía Pedroza github: https://github.com/raulmejia
 ##
