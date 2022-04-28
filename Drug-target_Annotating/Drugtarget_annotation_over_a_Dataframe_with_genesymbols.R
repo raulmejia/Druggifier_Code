@@ -7,7 +7,7 @@
 # Note: pwdefinitions your PtwDf_defintions and your PtwDf_defintions tables should be in the same Pathway database (KEGG , GO , etc )
 #
 # Input description: 
-#    -d dataframe (with a column with genesybols, no rownames ):
+#    -d dataframe (Should include a column with genesybols, no rownames ):
 #         Pathways        Target  MedianPDSzs     log2FC  DEGpvalue
 #         hsa00230 Purine metabolism      AMPD1   1.48432605718692        -2.02502990184976       4.54904680923331e-07
 #         hsa00230 Purine metabolism      AK5     1.48432605718692        -1.10711372264512       0.00158257005550845
