@@ -177,7 +177,7 @@ if( any(grepl( "clave", colnames(Bigdf)) ) == TRUE ) {
 ##########################################################
 write.table(Bigdf ,
             file=paste0(Path_of_Results,"/","DF_Pw_Target_PDS_LogFC_a.pval_Drug_InteractionType_Source_PMIDs",Label_for_Results,".tsv" ),
-            sep="\t", quote=FALSE , row.names= TRUE, col.names= TRUE  )
+            sep="\t", quote=FALSE , row.names= FALSE, col.names= TRUE  )
 write.table( DF_annotated_gene_symbols ,
             file=paste0(Path_of_Results,"/","DF_annotated_rDGIdbgene_symbols",Label_for_Results,".tsv" ),
             sep="\t", quote=FALSE , row.names= FALSE, col.names= TRUE  )
