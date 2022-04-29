@@ -5,6 +5,7 @@
 ##
 #
 # Note: pwdefinitions your PtwDf_defintions and your PtwDf_defintions tables should be in the same Pathway database (KEGG , GO , etc )
+#       In DEGpvalue use the adj.P.Val
 #
 # Input description: 
 #    -d dataframe (Should include a column with genesybols, no rownames ):
