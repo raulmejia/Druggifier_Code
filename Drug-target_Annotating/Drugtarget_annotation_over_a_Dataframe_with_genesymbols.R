@@ -98,7 +98,7 @@ yourdf <- read.table( file=args$dataframe , sep= "\t", header=TRUE, quote = "" ,
 columnwithgenesymbols <-args$columnname
 # columnwithgenesymbols <- "Target"
 
-dir.create( Path_of_Results, recursive = TRUE)
+dir.create( args$outputfolder, recursive = TRUE)
 
 Path_of_Results <- normalizePath( args$outputfolder )
 # Path_of_Results <- "Results/BigDfPTD/TCGA"
