@@ -98,9 +98,10 @@ yourdf <- read.table( file=args$dataframe , sep= "\t", header=TRUE, quote = "" ,
 columnwithgenesymbols <-args$columnname
 # columnwithgenesymbols <- "Target"
 
+dir.create( Path_of_Results, recursive = TRUE)
+
 Path_of_Results <- normalizePath( args$outputfolder )
 # Path_of_Results <- "Results/BigDfPTD/TCGA"
-dir.create( Path_of_Results, recursive = TRUE)
 
 Label_for_Results <- args$label
 # Label_for_Results  <- "Drug-target_annotated"
