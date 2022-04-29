@@ -4,6 +4,9 @@ This repo describes the approach used in https://www.frontiersin.org/articles/10
 ---
 Modules:
 ---
+### 0) Multiporpuse libraries
+General purpose libraries required for the programs
+
 ### 1) Subtyping 
 Obtaining the subtypes for your gene expression datasets (B)
 
@@ -21,7 +24,6 @@ Considering the data frame of integrated information you can identify which of y
 ### 4) Ranking
 Once obtained the previous dataframe you are free to apply several criteria to choose your candidate targets
 
-### 5) Multiporpuse libraries
-General purpose libraries required for the programs 
+ 
 
 ![alt text](https://www.frontiersin.org/files/Articles/390753/fphar-09-00905-HTML/image_m/fphar-09-00905-g001.jpg)
