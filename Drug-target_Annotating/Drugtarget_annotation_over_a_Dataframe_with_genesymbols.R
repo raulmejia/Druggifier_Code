@@ -127,8 +127,8 @@ La_clave <- table( DF_annotated_gene_symbols$Gene )
 
 df_not_orphans$clave <- rep( NA, dim(df_not_orphans)[1])
 
-for( k in df_not_orphans[ , "Target"]  ){
-  positions <- which( df_not_orphans[ , "Target"] %in%  k )
+for( k in df_not_orphans[ , columnwithgenesymbols ]  ){
+  positions <- which( df_not_orphans[ , columnwithgenesymbols ] %in%  k )
   df_not_orphans$clave[positions] <- La_clave[k]
 }
 
