@@ -86,7 +86,7 @@ mycoresavaiable <- as.numeric(mycoresavaiable)
 ######  Libraries needed    ####################
 ################################################
 if (!require("BiocManager")) {
-  biocLite("BiocManager")
+  install.packages("BiocManager")
   library(BiocManager)}
 if (!require("DESeq2")) {
   BiocManager::install("DESeq2")
