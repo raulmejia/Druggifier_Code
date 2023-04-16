@@ -4,7 +4,7 @@
 # It requires a indicator row to depict which columns are healthies (1 by convention) and disease (0)
 
 #################################################
-### Loading and installing required libraries
+### Loading and Installing the required libraries
 #################################################
 
 #################################################
